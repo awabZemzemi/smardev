@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Bureau Dashboard</title>
+
+    <!-- Link to Custom CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mb-4">RFID Bureau Dashboard</h1>
+
+        <!-- Current Users Section -->
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="section-title">Current Users in Bureau: <span id="users-in-office" class="badge bg-info">{{ users_in_office }}</span></h2>
+            </div>
+        </div>
+
+        <!-- User Logs Table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        Current Users in Bureau
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover" id="user-logs-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Entry Time</th>
+                                    <th>Exit Time</th>
+                                    <th>Time Spent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for name, logs in user_logs.items() %}
+                                    <tr>
+                                        <td>{{ name }}</td>
+                                        <td>{{ logs.first_entry }}</td>
+                                        <td>{{ logs.last_exit or "N/A" }}</td>
+                                        <td>{{ logs.time_spent }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remote Door Control Section -->
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="card mt-4">
+                    <div class="card-header bg-dark text-white">
+                        <h3>Remote Door Control</h3>
+                    </div>
+                    <div class="card-body">
+                        <button id="remote-open-button" class="btn btn-primary" onclick="remoteOpenDoor()">Open Door</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- User List and Status Table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        User List and Status
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-hover" id="user-status-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>RFID Tag</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>In Bureau</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in user_status_data %}
+                                    <tr>
+                                        <td>{{ user.rfid }}</td>
+                                        <td>{{ user.name }}</td>
+                                        <td>{{ user.status }}</td>
+                                        <td>{{ user.in_office }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Users Form -->
+        <div class="row form-container">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h3>Add User</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/add-user" method="post">
+                            <div class="mb-3">
+                                <label for="tag" class="form-label">RFID Tag</label>
+                                <input type="text" id="tag" name="tag" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-custom">Add User</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Block User Form -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h3>Block User</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/block-user" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-danger">Block User</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unblock User Form -->
+        <div class="row form-container">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h3>Unblock User</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/unblock-user" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">Unblock User</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap 5 JS and dependencies (Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript for Remote Door Control -->
+    <script>
+        function remoteOpenDoor() {
+            fetch('/remote-open', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

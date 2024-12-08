@@ -1,0 +1,145 @@
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E3F2FD; /* Light blue background for the page */
+    color: #333333; /* Dark grey text for readability */
+    margin: 20px;
+}
+
+/* Main Container */
+.container {
+    background-color: #FFFFFF; /* White background for the main container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Card Header Styling */
+.card-header {
+    background-color: #A5D8DD; /* Soft Aqua Blue */
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
+}
+
+/* Custom Button Styling */
+.btn-custom {
+    background-color: #0091D5; /* Vibrant Sky Blue */
+    color: white;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #007BB5; /* Slightly darker blue for hover effect */
+}
+
+.btn-danger {
+    background-color: #FF8A65; /* Soft Coral Orange */
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #FF7043; /* Darker coral on hover */
+}
+
+.btn-success {
+    background-color: #81C784; /* Soft Pastel Green */
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #66BB6A; /* Darker green for hover */
+}
+
+/* Table Styling */
+.table {
+    background-color: #FFFFFF; /* White background for the table */
+    border: 1px solid #B0BEC5; /* Light gray border */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #0091D5; /* Vibrant Sky Blue for headers */
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #E1F5FE; /* Lighter blue for hover effect */
+}
+
+/* Form Container */
+.form-container {
+    margin-bottom: 20px;
+    background-color: #C8E6C9; /* Soft Mint Green */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+}
+
+/* Form Labels and Inputs */
+input[type="text"] {
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #B0BEC5; /* Light gray border for input fields */
+}
+
+/* Header Colors */
+h1, h2 {
+    color: #0288D1; /* Bright Blue for main headings */
+}
+
+/* Section Titles */
+h2.section-title {
+    color: #00796B; /* Muted teal for section titles */
+    font-size: 1.5rem;
+}
+
+/* Card Body */
+.card-body {
+    background-color: #FAFAFA; /* Light gray for card bodies */
+    border-radius: 8px;
+}
+
+/* Additional Custom Styling for Titles */
+h3 {
+    color: #0288D1; /* Bright blue for sub-titles */
+}
+
+/* Improve Form Input Field Aesthetics */
+input[type="text"], button {
+    border-radius: 8px;
+}
+
+/* Page Heading and Background */
+h1 {
+    background-color: #0288D1; /* Bright Blue */
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Section Headings */
+.card-header h3 {
+    color: #FFFFFF; /* White text on card headers */
+}
+
+/* Table Containers */
+.table-container {
+    background-color: #FFFFFF; /* White background for table containers */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Row Background Color */
+.row {
+    margin-bottom: 20px;
+}
